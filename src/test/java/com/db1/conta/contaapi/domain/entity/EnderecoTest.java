@@ -11,7 +11,7 @@ public class EnderecoTest {
 		Cidade cidade = Mockito.mock(Cidade.class); //cidade mockada, para fins de testes e o campo nao tem nenhum comportamento, é utilizado um framework mockito
 		String mensagem = null;
 		try {
-			Endereco endereco = new Endereco(null, "Avenida Center", "800", cidade, TipoEndereco.RESIDENCIAL, null);
+			Endereco endereco = new Endereco(null, "Avenida Center", "800", "00000-000", cidade, TipoEndereco.RESIDENCIAL, null);
 		}catch (Exception e) {
 			mensagem = e.getMessage();
 		}
@@ -24,7 +24,7 @@ public class EnderecoTest {
 		Cidade cidade = Mockito.mock(Cidade.class);
 		String mensagem = null;
 		try {
-			Endereco endereco = new Endereco(cliente, null, "800", cidade, TipoEndereco.RESIDENCIAL, null);
+			Endereco endereco = new Endereco(cliente, null, "800", "00000-000", cidade, TipoEndereco.RESIDENCIAL, null);
 		}catch (Exception e) {
 			mensagem = e.getMessage();
 		}
@@ -37,11 +37,37 @@ public class EnderecoTest {
 		Cidade cidade = Mockito.mock(Cidade.class);
 		String mensagem = null;
 		try {
-			Endereco endereco = new Endereco(cliente, "Avenida Center", null, cidade, TipoEndereco.RESIDENCIAL, null);
+			Endereco endereco = new Endereco(cliente, "Avenida Center", null, "00000-000", cidade, TipoEndereco.RESIDENCIAL, null);
 		}catch (Exception e) {
 			mensagem = e.getMessage();
 		}
-		Assert.assertEquals("Numero do endereco é obrigatório", mensagem);
+		Assert.assertEquals("Número do endereco é obrigatório", mensagem);
+	}
+	
+	@Test
+	public void deveRetornarCepObrigatorio(){
+		Cliente cliente = Mockito.mock(Cliente.class);
+		Cidade cidade = Mockito.mock(Cidade.class);
+		String mensagem = null;
+		try {
+			Endereco endereco = new Endereco(cliente, "Avenida Center", "800", null, cidade, TipoEndereco.RESIDENCIAL, null);
+		}catch (Exception e) {
+			mensagem = e.getMessage();
+		}
+		Assert.assertEquals("CEP é obrigatório", mensagem);
+	}
+	
+	@Test
+	public void deveRetornarCepInvalido(){
+		Cliente cliente = Mockito.mock(Cliente.class);
+		Cidade cidade = Mockito.mock(Cidade.class);
+		String mensagem = null;
+		try {
+			Endereco endereco = new Endereco(cliente, "Avenida Center", "800", "000001-000", cidade, TipoEndereco.RESIDENCIAL, null);
+		}catch (Exception e) {
+			mensagem = e.getMessage();
+		}
+		Assert.assertEquals("CEP inválido", mensagem);
 	}
 	
 	@Test
@@ -50,7 +76,7 @@ public class EnderecoTest {
 		Cidade cidade = Mockito.mock(Cidade.class);
 		String mensagem = null;
 		try {
-			Endereco endereco = new Endereco(cliente, "Avenida Center", "800", null, TipoEndereco.RESIDENCIAL, null);
+			Endereco endereco = new Endereco(cliente, "Avenida Center", "800", "00000-000", null, TipoEndereco.RESIDENCIAL, null);
 		}catch (Exception e) {
 			mensagem = e.getMessage();
 		}
@@ -63,7 +89,7 @@ public class EnderecoTest {
 		Cidade cidade = Mockito.mock(Cidade.class);
 		String mensagem = null;
 		try {
-		Endereco endereco = new Endereco(cliente, "Avenida Center", "800", cidade, null, null);
+		Endereco endereco = new Endereco(cliente, "Avenida Center", "800", "00000-000", cidade, null, null);
 		}catch (Exception e) {
 			mensagem = e.getMessage();
 		}
@@ -77,7 +103,7 @@ public class EnderecoTest {
 		String mensagem = null;
 		Endereco endereco = null;
 		try {
-			endereco = new Endereco(cliente, "Avenida Center", "800", cidade, TipoEndereco.RESIDENCIAL, null);
+			endereco = new Endereco(cliente, "Avenida Center", "800", "00000-000", cidade, TipoEndereco.RESIDENCIAL, null);
 		}catch (Exception e) {
 			mensagem = e.getMessage();
 		}
@@ -85,8 +111,9 @@ public class EnderecoTest {
 		Assert.assertEquals(cliente, endereco.getCliente());
 		Assert.assertEquals("Avenida Center", endereco.getLogradouro());
 		Assert.assertEquals("800", endereco.getNumero());
+		Assert.assertEquals("00000-000", endereco.getCep());
 		Assert.assertEquals(cidade, endereco.getCidade());
 		Assert.assertEquals(TipoEndereco.RESIDENCIAL, endereco.getTipoEndereco());
-		Assert.assertEquals(null, endereco.getComplemento());
+		Assert.assertEquals(null, endereco.getComplemento());	
 	}
 }

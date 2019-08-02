@@ -24,7 +24,18 @@ public class ClienteTest {
 		}catch (Exception e) {
 			mensagem = e.getMessage();
 		}
-		Assert.assertEquals("CPF é obrigatório", mensagem);
+		Assert.assertEquals("CPF do cliente é obrigatório", mensagem);
+	}
+	
+	@Test
+	public void deveRetornarCpfInvalido() {
+		String mensagem = null;
+		try {
+			Cliente cliente = new Cliente("José", "000000000000");
+		}catch (Exception e) {
+			mensagem = e.getMessage();
+		}
+		Assert.assertEquals("CPF inválido", mensagem);
 	}
 	
 	@Test
@@ -38,6 +49,6 @@ public class ClienteTest {
 		}
 		Assert.assertNull(mensagem);
 		Assert.assertEquals("José", cliente.getNome());
-		Assert.assertEquals("0000000000", cliente.getCpf());
+		Assert.assertEquals("00000000000", cliente.getCpf());
 	}
 }
