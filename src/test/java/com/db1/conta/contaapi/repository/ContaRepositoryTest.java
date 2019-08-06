@@ -2,6 +2,7 @@ package com.db1.conta.contaapi.repository;
 
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class ContaRepositoryTest{
 	private CidadeRepository cidadeRepository;
 	
 	@After
-	public void afterTest() {
+	public void AfterTest() {
 		contaRepository.deleteAll();
 		agenciaRepository.deleteAll();
 		clienteRepository.deleteAll();

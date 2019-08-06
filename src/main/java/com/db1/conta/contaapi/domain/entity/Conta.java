@@ -48,6 +48,8 @@ public class Conta {
 	@CollectionTable(name="historico_conta", joinColumns = @JoinColumn(name = "conta_id"))
 	private List<Historico> conta = new ArrayList<Historico>();
 	
+	protected Conta() {}
+	
 	public Conta (Agencia agencia, String numero, TipoConta tipoConta, Cliente cliente, Double saldo){
 		Assert.hasText(numero, "O número da conta é obrigatória");
 		Assert.notNull(saldo, "Saldo inválido");

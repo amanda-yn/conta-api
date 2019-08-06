@@ -13,7 +13,7 @@ public class HistoricoTest {
 		Conta conta = Mockito.mock(Conta.class);
 		String mensagem = null;
 		try {
-			Historico historico = new Historico(null, 1000.0, 4000.0, TipoHistorico.SAIDA, conta);
+			Historico historico = new Historico(null, 1000.0, 4000.0, TipoHistorico.SAIDA);
 		}catch (Exception e) {
 			mensagem = e.getMessage();
 		}
@@ -25,7 +25,7 @@ public class HistoricoTest {
 		Conta conta = Mockito.mock(Conta.class);
 		String mensagem = null;
 		try {
-			Historico historico = new Historico(LocalDateTime.now(), null, 4000.0, TipoHistorico.SAIDA, conta);
+			Historico historico = new Historico(LocalDateTime.now(), null, 4000.0, TipoHistorico.SAIDA);
 		}catch (Exception e) {
 			mensagem = e.getMessage();
 		}
@@ -37,7 +37,7 @@ public class HistoricoTest {
 		Conta conta = Mockito.mock(Conta.class);
 		String mensagem = null;
 		try {
-			Historico historico = new Historico(LocalDateTime.now(), 1000.0, null, TipoHistorico.SAIDA, conta);
+			Historico historico = new Historico(LocalDateTime.now(), 1000.0, null, TipoHistorico.SAIDA);
 		}catch (Exception e) {
 			mensagem = e.getMessage();
 		}
@@ -49,24 +49,24 @@ public class HistoricoTest {
 		Conta conta = Mockito.mock(Conta.class);
 		String mensagem = null;
 		try {
-			Historico historico = new Historico(LocalDateTime.now(), 1000.0, 4000.0, null, conta);
+			Historico historico = new Historico(LocalDateTime.now(), 1000.0, 4000.0, null);
 		}catch (Exception e) {
 			mensagem = e.getMessage();
 		}
 		Assert.assertEquals("O tipo do histórico é obrigatório", mensagem);
 	}
 	
-	@Test
-	public void deveRetornarContaObrigatorio() {
-		Conta conta = Mockito.mock(Conta.class);
-		String mensagem = null;
-		try {
-			Historico historico = new Historico(LocalDateTime.now(), 1000.0, 4000.0, TipoHistorico.SAIDA, null);
-		}catch (Exception e) {
-			mensagem = e.getMessage();
-		}
-		Assert.assertEquals("A conta é obrigatória", mensagem);
-	}
+//	@Test
+//	public void deveRetornarContaObrigatorio() {
+//		Conta conta = Mockito.mock(Conta.class);
+//		String mensagem = null;
+//		try {
+//			Historico historico = new Historico(LocalDateTime.now(), 1000.0, 4000.0, TipoHistorico.SAIDA, null);
+//		}catch (Exception e) {
+//			mensagem = e.getMessage();
+//		}
+//		Assert.assertEquals("A conta é obrigatória", mensagem);
+//	}
 	
 	@Test
 	public void deveCriarUmaInstanciaHistorico() {
@@ -74,7 +74,7 @@ public class HistoricoTest {
 		String mensagem = null;
 		Historico historico = null;
 		try {
-			historico = new Historico(LocalDateTime.now(), 1000.0, 4000.0, TipoHistorico.SAIDA, conta);
+			historico = new Historico(LocalDateTime.now(), 1000.0, 4000.0, TipoHistorico.SAIDA);
 		}catch (Exception e) {
 			mensagem = e.getMessage();
 		}
@@ -83,6 +83,6 @@ public class HistoricoTest {
 		Assert.assertEquals(1000.0, historico.getValor(), 0000.1);
 		Assert.assertEquals(4000.0, historico.getValorResultado(), 0000.1);
 		Assert.assertEquals(TipoHistorico.SAIDA, historico.getTipoHistorico());
-		Assert.assertEquals(conta, historico.getConta()); 
+		//Assert.assertEquals(conta, historico.getConta()); 
 	}
 }
