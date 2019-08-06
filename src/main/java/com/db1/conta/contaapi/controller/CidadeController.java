@@ -2,8 +2,6 @@ package com.db1.conta.contaapi.controller;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,12 +33,12 @@ public class CidadeController {
 		return cidadeService.buscarTodasCidades();
 	}
 	
-	@GetMapping 								// Exemplo: ?nome=Maringa
+	@GetMapping						// Exemplo: ?nome=Maringa
 	public CidadeResponseDTO buscarCidadePorNome(@RequestParam("nome") String nome) { //Quando utilizar Request Param
 		return cidadeService.buscarCidadePorNome(nome);
 	}
 	
-	@GetMapping("/{id}") 						// Exemplo : 5
+	@GetMapping("/{id}")			// Exemplo : 5
 	public CidadeResponseDTO buscarCidadePorId(@PathVariable("id") Long id) { //Quando utilizar Path Variable
 		return cidadeService.buscarCidadePorId(id);
 	}

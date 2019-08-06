@@ -29,7 +29,7 @@ public class CidadeService { //Processo de chamar os repositorios
 	public CidadeResponseDTO update(Long cidadeId, CidadePersistDTO dto) {
 		//Devolve uma cidade encapsulada do tipo optional
 		Cidade cidade = cidadeRepository.findById(cidadeId).orElseThrow(() -> new RuntimeException("Cidade ID " + 
-		cidadeId + "não encontrada"));
+		cidadeId + " não encontrada"));
 		cidade.alterarCidade(dto.getNome(), dto.getEstado());
 		cidadeRepository.save(cidade);
 		return CidadeAdapter.entityToResponse(cidade);
@@ -41,7 +41,7 @@ public class CidadeService { //Processo de chamar os repositorios
 			Cidade cidade = opCidade.get();
 			cidadeRepository.delete(cidade);
 		}
-		throw new RuntimeException("Cidade ID " + cidadeId + "não encontrada");
+		throw new RuntimeException("Cidade ID " + cidadeId + " não encontrada");
 	}
 	
 	public List<CidadeResponseDTO> buscarTodasCidades() {
@@ -57,7 +57,7 @@ public class CidadeService { //Processo de chamar os repositorios
 			Cidade cidade = opCidade.get();
 			return CidadeAdapter.entityToResponse(cidade);
 		}
-		throw new RuntimeException("Cidade ID " + cidadeId + "não encontrada");
+		throw new RuntimeException("Cidade ID " + cidadeId + " não encontrada");
 	}
 	 
 	public CidadeResponseDTO buscarCidadePorNome(String nome) { //Java 8
@@ -67,7 +67,7 @@ public class CidadeService { //Processo de chamar os repositorios
 			CidadeResponseDTO cidadeResponse = CidadeAdapter.entityToResponse(cidade);
 			return cidadeResponse;
 		}
-		throw new RuntimeException("Cidade " + nome + "não encontrada");
+		throw new RuntimeException("Cidade " + nome + " não encontrada");
 		
 //		return cidadeRepository
 //				.findByNomeOptional(nome)
