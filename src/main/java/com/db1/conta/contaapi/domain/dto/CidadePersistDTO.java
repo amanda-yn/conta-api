@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.db1.conta.contaapi.domain.entity.Estado;
 
+//Maikon usa na entrada o nome Persist
 public class CidadePersistDTO implements Serializable{ //Entrada - Front-end
 
 	private static final long serialVersionUID = 7041215295972851764L;
