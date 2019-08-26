@@ -14,39 +14,39 @@ import com.db1.conta.contaapi.domain.entity.Estado;
 import com.db1.conta.contaapi.domain.entity.TipoEndereco;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest	
+@SpringBootTest
 public class ClienteRepositoryTest {
-	
+
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
+
 	@Autowired
 	private CidadeRepository cidadeRepository;
-	
+
 	@After
 	public void afterTest() {
 		clienteRepository.deleteAll();
 		cidadeRepository.deleteAll();
 	}
-	
+
 	@Test
 	public void deveSalvarUmNovoCliente() {
 		Cliente cliente = new Cliente("Nome do Cliente", "99999999999");
-		Cliente clienteSalva = clienteRepository.save(cliente);
-		
-		Assert.assertNotNull(clienteSalva);
-		Assert.assertEquals(cliente.getCpf(), clienteSalva.getCpf());
-		Assert.assertEquals(cliente.getNome(), clienteSalva.getNome());
+		Cliente clienteSalvo = clienteRepository.save(cliente);
+
+		Assert.assertNotNull(clienteSalvo);
+		Assert.assertEquals(cliente.getCpf(), clienteSalvo.getCpf());
+		Assert.assertEquals(cliente.getNome(), clienteSalvo.getNome());
 	}
-	
+
 	@Test
 	public void deveSalvarClienteComEndereco() {
 		Cliente cliente = new Cliente("Nome do Cliente", "99999999999");
 		Cidade cidade = cidadeRepository.save(new Cidade("Maringá", Estado.PR));
-		
+
 		cliente.addEndereco("Rua A", "99", "00000-000", cidade, TipoEndereco.COBRANCA, null);
 		Cliente clienteSalvo = clienteRepository.save(cliente);
-		
+
 		Assert.assertEquals(cliente.getCpf(), clienteSalvo.getCpf());
 		Assert.assertEquals(cliente.getNome(), clienteSalvo.getNome());
 		Assert.assertEquals(1, clienteSalvo.getEnderecos().size());

@@ -1,5 +1,6 @@
 package com.db1.conta.contaapi.domain.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,13 +47,12 @@ public class Conta {
 	
 	@ElementCollection
 	@CollectionTable(name="historico_conta", joinColumns = @JoinColumn(name = "conta_id"))
-	private List<Historico> conta = new ArrayList<Historico>();
+	private List<Historico> historico = new ArrayList<Historico>();
 	
 	protected Conta() {}
 	
-	public Conta (Agencia agencia, String numero, TipoConta tipoConta, Cliente cliente, Double saldo){
+	public Conta (Agencia agencia, String numero, TipoConta tipoConta, Cliente cliente){
 		Assert.hasText(numero, "O número da conta é obrigatória");
-		Assert.notNull(saldo, "Saldo inválido");
 		Assert.notNull(agencia, "Agência é obrigatório");
 		Assert.notNull(tipoConta, "O tipo da conta é obrigatório");
 		Assert.notNull(cliente, "O cliente é obrigatório");
@@ -61,7 +61,7 @@ public class Conta {
 		this.numero = numero;
 		this.tipoConta = tipoConta;
 		this.cliente = cliente;
-		this.saldo = saldo;
+		this.saldo = 0.0;
 	}
 
 	public Long getId() {
@@ -86,5 +86,14 @@ public class Conta {
 
 	public Double getSaldo() {
 		return saldo;
+	}
+	
+	public List<Historico> getHistorico() {
+		return historico;
+	}
+
+	public void depositar(Double valor) {		
+		this.saldo += valor;
+		this.historico.add(new Historico(LocalDateTime.now(), valor, this.saldo, TipoHistorico.ENTRADA));
 	}
 }

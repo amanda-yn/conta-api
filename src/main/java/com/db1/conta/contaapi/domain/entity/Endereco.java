@@ -14,7 +14,6 @@ import javax.persistence.UniqueConstraint;
 
 import org.springframework.util.Assert;
 
-
 @Entity
 @Table(name = "endereco",
 		uniqueConstraints = @UniqueConstraint(columnNames = { "logradouro", "cidade_id"}))
@@ -54,7 +53,7 @@ public class Endereco {
 		Assert.hasText(logradouro, "Logradouro é obrigatório");
 		Assert.hasText(numero, "Número do endereco é obrigatório");
 		Assert.hasText(cep, "CEP é obrigatório");
-		Assert.isTrue(cep.length() == 9, "CEP inválido"); //Testar
+		Assert.isTrue(cep.length() == 9, "CEP inválido"); 
 		Assert.notNull(cliente, "Cliente é obrigatório");
 		Assert.notNull(cidade, "Cidade é obrigatório");
 		Assert.notNull(tipoEndereco, "O tipo de endereço é obrigatório");

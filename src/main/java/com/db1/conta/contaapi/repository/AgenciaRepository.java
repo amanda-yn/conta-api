@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.db1.conta.contaapi.domain.entity.Agencia;
 import com.db1.conta.contaapi.domain.entity.Estado;
 
-public interface AgenciaRepository extends JpaRepository< Agencia, Long> {
+public interface AgenciaRepository extends JpaRepository<Agencia, Long> {
 	Agencia findByNumero(String numero);
+
 	Agencia findByDigito(String digito);
-	
-	//Busca na coluna Cidade as cidades por Estado
-	List<Agencia> findByCidadeEstado (Estado estado); 
+
+	// Busca na coluna Cidade as cidades por Estado
+	List<Agencia> findByCidadeEstado(Estado estado);
 }

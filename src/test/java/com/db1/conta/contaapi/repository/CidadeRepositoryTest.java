@@ -15,45 +15,47 @@ import com.db1.conta.contaapi.domain.entity.Estado;
 
 //teste de integração
 @RunWith(SpringRunner.class)
-@SpringBootTest	
+@SpringBootTest
 public class CidadeRepositoryTest {
-	
+
 	@Autowired
-	private CidadeRepository cidadeRepository; //A JPA transforma uma classe em uma entidade
-	
+	private CidadeRepository cidadeRepository;
+	// A JPA transforma uma classe em uma entidade
+
 	@After
-	public void afterTest() { 
-		//Deleta todas as cidades do repositório depois da execução, utilizado quando tem uma conexão no banco
-		cidadeRepository.deleteAll(); 
+	public void afterTest() {
+		// Deleta todas as cidades do repositório depois da execução, utilizado quando
+		// tem uma conexão no banco
+		cidadeRepository.deleteAll();
 	}
-	
+
 	@Test
 	public void deveSalvarUmaCidade() {
 		Cidade cidade = new Cidade("Maringá", Estado.PR);
 		Cidade cidadeSalva = cidadeRepository.save(cidade);
-		
+
 		Assert.assertNotNull(cidadeSalva.getId());
 		Assert.assertEquals(cidade.getNome(), cidadeSalva.getNome());
-		Assert.assertEquals(cidade.getEstado(), cidadeSalva.getEstado());	
+		Assert.assertEquals(cidade.getEstado(), cidadeSalva.getEstado());
 	}
-	
+
 	@Test
 	public void deveBuscarCidadePorNome() {
 		Cidade cidade = new Cidade("Maringá", Estado.PR);
-		Cidade cidadeSalva = cidadeRepository.save(cidade);
-		
+		cidadeRepository.save(cidade);
+
 		Cidade cidadeBuscadaPorNome = cidadeRepository.findByNome("Maringá");
-		
+
 		Assert.assertNotNull(cidadeBuscadaPorNome);
 		Assert.assertEquals(cidade.getNome(), cidadeBuscadaPorNome.getNome());
-		Assert.assertEquals(cidade.getEstado(), cidadeBuscadaPorNome.getEstado());	
+		Assert.assertEquals(cidade.getEstado(), cidadeBuscadaPorNome.getEstado());
 	}
-	
+
 	@Test
 	public void deveRetornarCidadePorEstado() {
 		Cidade cidade = new Cidade("Maringá", Estado.PR);
 		cidadeRepository.save(cidade);
-		
+
 		List<Cidade> cidades = cidadeRepository.findByEstado(Estado.PR);
 		Assert.assertEquals(1, cidades.size());
 	}

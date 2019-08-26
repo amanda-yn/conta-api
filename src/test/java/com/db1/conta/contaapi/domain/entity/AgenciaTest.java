@@ -5,50 +5,51 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 public class AgenciaTest {
+
+	private Agencia agencia = null;
 	
 	@Test
 	public void deveRetornarNumeroDaAgenciaObrigatorio() {
 		Cidade cidade = Mockito.mock(Cidade.class);
 		String mensagem = null;
 		try {
-			Agencia agencia = new Agencia(null, "1", cidade);
-		}catch (Exception e) {
+			agencia = new Agencia(null, "1", cidade);
+		} catch (Exception e) {
 			mensagem = e.getMessage();
 		}
 		Assert.assertEquals("O número da agência é obrigatório", mensagem);
 	}
-	
+
 	@Test
 	public void deveRetornarDigitoDaAgenciaObrigatorio() {
 		Cidade cidade = Mockito.mock(Cidade.class);
 		String mensagem = null;
 		try {
-			Agencia agencia = new Agencia("001", null, cidade);
-		}catch (Exception e) {
+			agencia = new Agencia("001", null, cidade);
+		} catch (Exception e) {
 			mensagem = e.getMessage();
 		}
 		Assert.assertEquals("O dígito da agência é obrigatório", mensagem);
 	}
-	
+
 	@Test
 	public void deveRetornarCidadeObrigatorio() {
 		String mensagem = null;
 		try {
-			Agencia agencia = new Agencia("001", "1", null);
-		}catch (Exception e) {
+			agencia = new Agencia("001", "1", null);
+		} catch (Exception e) {
 			mensagem = e.getMessage();
 		}
 		Assert.assertEquals("Cidade é obrigatório", mensagem);
 	}
-	
+
 	@Test
 	public void deveCriarInstanciaAgencia() {
 		Cidade cidade = Mockito.mock(Cidade.class);
 		String mensagem = null;
-		Agencia agencia = null;
 		try {
 			agencia = new Agencia("001", "1", cidade);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			mensagem = e.getMessage();
 		}
 		Assert.assertNull(mensagem);
